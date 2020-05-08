@@ -63,17 +63,6 @@ pipeline
                 }
 
             }
-        }
-        stage ('deploy')
-        {
-            steps
-            {
-                withMaven(jdk: 'localjdk-8', maven: 'localmvn') 
-                {
-                    sh 'mvn deploy'
-                }
-
-            }
-        }
+        }       
     }
 } 
