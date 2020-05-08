@@ -20,5 +20,60 @@ pipeline
                 }
             }
         }
+        stage ('test')
+        {
+            steps
+            {
+                withMaven(jdk: 'localjdk-8', maven: 'localmvn') 
+                {
+                    sh 'mvn test'
+                }
+
+            }
+        }
+        stage ('package')
+        {
+            steps
+            {
+                withMaven(jdk: 'localjdk-8', maven: 'localmvn') 
+                {
+                    sh 'mvn package'
+                }
+
+            }
+        }
+        stage ('verify')
+        {
+            steps
+            {
+                withMaven(jdk: 'localjdk-8', maven: 'localmvn') 
+                {
+                    sh 'mvn verify'
+                }
+
+            }
+        }
+        stage ('install')
+        {
+            steps
+            {
+                withMaven(jdk: 'localjdk-8', maven: 'localmvn') 
+                {
+                    sh 'mvn install'
+                }
+
+            }
+        }
+        stage ('deploy')
+        {
+            steps
+            {
+                withMaven(jdk: 'localjdk-8', maven: 'localmvn') 
+                {
+                    sh 'mvn deploy'
+                }
+
+            }
+        }
     }
 } 
