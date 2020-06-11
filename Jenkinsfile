@@ -64,14 +64,11 @@ pipeline
 
             }
         }
-        stage ('tomcat deployment')
+        stage ('tomcat installation')
         {
             steps
             {
-                sshagent(['deploytomcat']) 
-                {
-                    sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.20.127:/var/lib/tomcat/webapps'
-                }
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'ansible', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ansible-playbook /etc/ansible/playbooks/tomcat_instal.yml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '//etc//ansible//playbooks', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'tomcat_instal.yml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 
             }
         }
