@@ -1,0 +1,19 @@
+---
+- hosts: amazonweb
+  tasks:
+    - name: 'please install java'
+      yum: name=java-1.8.0 state=latest
+
+    - name: 'download tomcat tar file'
+      get_url:
+        url: https://downloads.apache.org/tomcat/tomcat-8/v8.5.56/bin/apache-tomcat-8.5.56.tar.gz
+        dest: /opt
+
+    - name: 'unarchive tomcat tar file'
+      unarchive:
+        src: /opt/apache-tomcat-8.5.56.tar.gz
+        dest: /opt
+        remote_src: yes
+
+    - name: 'start tomcat services'
+      command: nohup /opt/apache-tomcat-8.5.56/bin/startup.sh
